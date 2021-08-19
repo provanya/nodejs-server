@@ -1,5 +1,4 @@
 const sharp = require("sharp");
-const fs = require('fs')
 exports.index = function(req, res){
     message = '';
    if(req.method == "POST"){
@@ -11,11 +10,16 @@ exports.index = function(req, res){
       var mob= post.mob_no;
 
 
-	  if (!req.files)
+
+
+
+	  if (req.files.uploaded_image == undefined)
 				return res.status(400).send('No files were uploaded.');
 
 		var file = req.files.uploaded_image;
 		var img_name=file.name;
+
+var oldFile = "./public/images/upload_images/"+file.name
 
 	  	 if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/gif" ){
 
@@ -33,21 +37,14 @@ exports.index = function(req, res){
 	                return res.status(500).send(err);
       					var sql = "INSERT INTO `users_image`(`first_name`,`last_name`,`mob_no`,`user_name`, `password` ,`image`) VALUES ('" + fname + "','" + lname + "','" + mob + "','" + name + "','" + pass + "','o" + img_name + "')";
 
-    						var query = db.query(sql, function(err, result) {
+                	var query = db.query(sql, function(err, result) {
     							 res.redirect('profile/'+result.insertId);
 
+  						});
 
-                   const path = './public/images/upload_images/'+file.name
-                   try {
-                     fs.unlinkSync(path)
-                     //file removed
-                   } catch(err) {
-                     console.error(err)
-                     }
-
-
-                    						});
 					   });
+
+
           } else {
             message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
             res.render('index.ejs',{message: message});
@@ -58,6 +55,8 @@ exports.index = function(req, res){
 
 };
 
+
+
 exports.profile = function(req, res){
 	var message = '';
 	var id = req.params.id;
@@ -67,5 +66,7 @@ exports.profile = function(req, res){
 	  message = "Profile not found!";
 
       res.render('profile.ejs',{data:result, message: message});
+
    });
-};
+
+   };
