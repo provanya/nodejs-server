@@ -6,6 +6,7 @@ var express = require('express')
 	mysql      = require('mysql'),
 	bodyParser=require("body-parser"),
   sharp = require('sharp');
+
 var connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
@@ -16,10 +17,6 @@ var connection = mysql.createConnection({
 connection.connect();
 
 global.db = connection;
-
-sharp('./public/images/upload_images/test.jpg')
-    .resize(200, 200)
-    .toFile("./public/images/upload_images/1.jpg")
 
 // all environments
 app.set('port', process.env.PORT || 8080);

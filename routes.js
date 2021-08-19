@@ -1,3 +1,5 @@
+const sharp = require("sharp");
+const fs = require('fs')
 exports.index = function(req, res){
     message = '';
    if(req.method == "POST"){
@@ -19,14 +21,32 @@ exports.index = function(req, res){
 
               file.mv('public/images/upload_images/'+file.name, function(err) {
 
+
+                sharp('./public/images/upload_images/'+file.name)
+                    .resize(200, 200)
+                    .toFile("./public/images/upload_images/o"+file.name)
+
+
+
 	              if (err)
 
 	                return res.status(500).send(err);
-      					var sql = "INSERT INTO `users_image`(`first_name`,`last_name`,`mob_no`,`user_name`, `password` ,`image`) VALUES ('" + fname + "','" + lname + "','" + mob + "','" + name + "','" + pass + "','" + img_name + "')";
+      					var sql = "INSERT INTO `users_image`(`first_name`,`last_name`,`mob_no`,`user_name`, `password` ,`image`) VALUES ('" + fname + "','" + lname + "','" + mob + "','" + name + "','" + pass + "','o" + img_name + "')";
 
     						var query = db.query(sql, function(err, result) {
     							 res.redirect('profile/'+result.insertId);
-    						});
+
+
+                   const path = './public/images/upload_images/'+file.name
+                   try {
+                     fs.unlinkSync(path)
+                     //file removed
+                   } catch(err) {
+                     console.error(err)
+                     }
+
+
+                    						});
 					   });
           } else {
             message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
