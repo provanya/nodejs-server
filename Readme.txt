@@ -1,4 +1,8 @@
-//створіть MySQL таблицю з базою даних: 'nodemysql'
+//MySQL 
+//зайдіть в phpmyadmin
+//створіть базу даних: 'nodemysql'
+//та виконайте SQL запит/запити у базі даних nodemysql: 
+//туди потрібно скопіювати цей код.
 CREATE TABLE IF NOT EXISTS `users_image` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
