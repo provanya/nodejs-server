@@ -1,4 +1,4 @@
-//створіть MYSQL таблицю з базою даних: 'nodemysql'
+//створіть MySQL таблицю з базою даних: 'nodemysql'
 CREATE TABLE IF NOT EXISTS `users_image` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
