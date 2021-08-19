@@ -1,18 +1,33 @@
 <ul>
-  <li><a href='/'> Перейти на головну сторінку</a></li>
-  </ul>
+  <li><a href="/"> Перейти на головну сторінку</a></li>
+</ul>
 
 <div class="form-group">
-<label for="mob_no" class="col-md-3 control-label">ID</label>
-<div class="col-md-9">
-<input type="number" class="form-control" id="number" name="id" placeholder="Ваше ID">
+  <label for="mob_no" class="col-md-3 control-label">ID</label>
+  <div class="col-md-9">
+    <input
+      type="number"
+      class="form-control"
+      id="number"
+      name="id"
+      placeholder="Ваше ID"
+    />
+  </div>
+  <div class="col-md-offset-3 col-md-9">
+    <button
+      onClick="redirect();"
+      id="my"
+      style="margin-top: 5px"
+      type="submit"
+      class="btn btn-info"
+    >
+      <i class="icon-hand-right"></i> &nbsp Пошук ID
+    </button>
+  </div>
+  <script>
+    redirect = () => {
+      let id = document.getElementById('number').value;
+      window.location.href = `/profile/${id}`;
+    };
+  </script>
 </div>
-<div class="col-md-offset-3 col-md-9">
-    <button onClick="redirect();" id="my" style=" margin-top:5px" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Пошук ID</button>
-</div>
-<script>
-redirect = () => {
-  let id = document.getElementById('number').value;
-  window.location.href=`/profile/${id}`;
-}
-</script>
